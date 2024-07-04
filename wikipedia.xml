@@ -2,12 +2,12 @@
 <extension version="4.0" type="plugin" group="content" method="upgrade">
 	<name>PLG_CONTENT_WIKIPEDIA</name>
 	<author>conseilgouz</author>
-	<creationDate>2024-07-03</creationDate>
+	<creationDate>2024-07-04</creationDate>
 	<copyright>Copyright (C) 2024 ConseilGouz. All rights reserved.</copyright>
 	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
 	<authorUrl>www.conseilgouz.com</authorUrl>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<description>PLG_CONTENT_WIKIPEDIA_XML_DESCRIPTION</description>
 	<files>
 		<folder plugin="wikipedia">services</folder>
