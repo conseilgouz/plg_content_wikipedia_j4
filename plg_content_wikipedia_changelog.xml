@@ -1,0 +1,14 @@
+<changelogs>
+    <changelog>
+		<element>wikipedia</element>
+		<type>plugin</type>
+		<group>content</group>
+		<version>1.0.0</version>
+        <note>
+            <item>Update : 04/07/2024</item>
+        </note>
+		<addition>
+			<item>New content plugin</item>
+		</addition>
+    </changelog>
+</changelogs>
