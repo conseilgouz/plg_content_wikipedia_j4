@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
 	<authorUrl>www.conseilgouz.com</authorUrl>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<description>PLG_CONTENT_WIKIPEDIA_XML_DESCRIPTION</description>
 	<files>
 		<folder plugin="wikipedia">services</folder>
@@ -29,7 +29,7 @@
 	<scriptfile>script.php</scriptfile>
 	<namespace path="src">ConseilGouz\Plugin\Content\Wikipedia</namespace>
 	
-	<changelogurl>https://raw.githubusercontent.com/conseilgouz/plg_content_automsg_j4/master/plg_content_wikipedia_changelog.xml</changelogurl>
+	<changelogurl>https://raw.githubusercontent.com/conseilgouz/plg_content_wikipedia_j4/master/plg_content_wikipedia_changelog.xml</changelogurl>
 	
 	<config>
 		<fields name="params">
