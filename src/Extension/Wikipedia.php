@@ -24,8 +24,6 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
     {
         return [
             'onContentPrepare'   => 'onContent',
-            'onAjaxWikipedia'   => 'goAjax',
-
         ];
     }
     public function onContent(ContentPrepareEvent $event)
@@ -33,7 +31,9 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
         $context = $event[0];
         $article = $event[1];
         $params = $event[2];
-
+        if (($context != "com_content.featured") && ($context != "com_content.category") && ($context != "com_content.article")) {
+            return;
+        }
         $media	= 'media/plg_content_wikipedia/';
         /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
         $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
@@ -56,15 +56,5 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
         );
 
         return true;
-    }
-    public function goAjax($event)
-    {
-        $input	= Factory::getApplication()->input;
-        $text  = $input->get('text', '', 'string');
-
-        $out = '{"ret":"9","msg":"'.$text.'"}';
-        return  $event->addResult($out);
-
-
     }
 }

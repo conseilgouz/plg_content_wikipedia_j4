@@ -3,6 +3,19 @@
 		<element>wikipedia</element>
 		<type>plugin</type>
 		<group>content</group>
+		<version>1.0.4</version>
+        <note>
+            <item>Update : 04/07/2024</item>
+        </note>
+		<fix>
+			<item>Limit context</item>
+			<item>Remove Ajax call</item>
+		</fix>
+    </changelog>
+    <changelog>
+		<element>wikipedia</element>
+		<type>plugin</type>
+		<group>content</group>
 		<version>1.0.3</version>
         <note>
             <item>Update : 04/07/2024</item>
