@@ -16,6 +16,7 @@
 	</files>
 	<media folder="media" destination="plg_content_wikipedia">
         <folder>js</folder>
+        <folder>css</folder>
         <filename>index.html</filename>
 	</media>
     <languages>
