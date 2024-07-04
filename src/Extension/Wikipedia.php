@@ -25,27 +25,46 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
         return [
             'onContentPrepare'   => 'onContent',
             'onAjaxWikipedia'   => 'goAjax',
-            
+
         ];
     }
     public function onContent(ContentPrepareEvent $event)
     {
-        
+        $context = $event[0];
+        $article = $event[1];
+        $params = $event[2];
+
         $media	= 'media/plg_content_wikipedia/';
         /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
         $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
         $wa->registerAndUseStyle('wikipedia', $media.'css/wikipedia.css');
         $wa->registerAndUseScript('wikipedia', $media.'js/wikipedia.js');
+        $dictionary = [];
+        $sectionsList = $this->params->get('sectionsList');
+        foreach ($sectionsList as $section) {
+            $entry = [];
+            $entry['definition'] = $section->definition;
+            $entry['language'] = $section->language;
+            $entry['url'] = $section->url;
+            $lang = explode('-', $entry['language'])[0];
+            $dictionary[strtolower($section->text).'&'.$lang] = $entry;
+        }
+        Factory::getApplication()->getDocument()->addScriptOptions(
+            'plg_content_wikipedia',
+            array('dictionary' => $dictionary
+                )
+        );
 
         return true;
     }
-    public function goAjax($event) {
+    public function goAjax($event)
+    {
         $input	= Factory::getApplication()->input;
         $text  = $input->get('text', '', 'string');
 
-        $out ='{"ret":"9","msg":"'.$text.'"}';
+        $out = '{"ret":"9","msg":"'.$text.'"}';
         return  $event->addResult($out);
 
-        
+
     }
 }

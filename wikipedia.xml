@@ -7,12 +7,13 @@
 	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
 	<authorUrl>www.conseilgouz.com</authorUrl>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<description>PLG_CONTENT_WIKIPEDIA_XML_DESCRIPTION</description>
 	<files>
 		<folder plugin="wikipedia">services</folder>
 		<folder>src</folder>
 		<filename >index.html</filename>
+		<filename >section.xml</filename>
 	</files>
 	<media folder="media" destination="plg_content_wikipedia">
         <folder>js</folder>
@@ -35,6 +36,12 @@
 			<fieldset name="basic">
 				
 			</fieldset>
+            <fieldset name="dictionary_set" label="PLG_CONTENT_WIKIPEDIA_DICTIONARY">
+                    <field type="note" name="note1" description="PLG_CONTENT_WIKIPEDIA_NOTE1" class="alert-success"/> 
+                    <field name="sectionsList" label="" type="subform" multiple ="true" 
+                        formsource="/plugins/content/wikipedia/section.xml"   />
+            </fieldset>
+            
 		</fields>
 	</config>
     <updateservers>

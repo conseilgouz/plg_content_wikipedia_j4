@@ -3,6 +3,18 @@
 		<element>wikipedia</element>
 		<type>plugin</type>
 		<group>content</group>
+		<version>1.0.2</version>
+        <note>
+            <item>Update : 04/07/2024</item>
+        </note>
+		<addition>
+			<item>Dictionary definition in plugin's parameters</item>
+		</addition>
+    </changelog>
+    <changelog>
+		<element>wikipedia</element>
+		<type>plugin</type>
+		<group>content</group>
 		<version>1.0.1</version>
         <note>
             <item>Update : 04/07/2024</item>

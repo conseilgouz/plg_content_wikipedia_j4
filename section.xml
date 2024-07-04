@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<config>         
+		<inlinehelp button="show"/>     
+	</config>
+
+     <fieldset name="dictionary">
+		<field name="text" type="text" label="PLG_CONTENT_WIKIPEDIA_TEXT" description="PLG_CONTENT_WIKIPEDIA_TEXT_DESC"  default="" class="thirty left"/>
+		<field name="definition" type="text" label="PLG_CONTENT_WIKIPEDIA_DEF" description="PLG_CONTENT_WIKIPEDIA_DEF_DESC" default =""	class="seventy  "/>	
+		<field name="language"	type="contentlanguage"
+			label="JFIELD_LANGUAGE_LABEL" description="CG_ISO_LANGUAGE_DESC" class="thirty left">
+			<option value="*">JALL</option>
+		</field>
+		<field name="url" type="text" label="PLG_CONTENT_WIKIPEDIA_URL" description="PLG_CONTENT_WIKIPEDIA_URL_DESC" default =""	class="seventy  "/>	
+        
+	</fieldset>
+</form>
