@@ -7,6 +7,11 @@
  */
 document.addEventListener("DOMContentLoaded", function(){
     // check CG custom classes
+    labels = document.querySelectorAll('#general .control-label');
+    for(var i=0; i< labels.length; i++) {
+        let label = labels[i];
+        label.style.width = 'auto';
+    }
     labels = document.querySelectorAll('#attrib-dictionary_set .control-label');
     for(var i=0; i< labels.length; i++) {
         let label = labels[i];

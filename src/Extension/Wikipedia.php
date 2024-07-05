@@ -51,7 +51,10 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
         }
         Factory::getApplication()->getDocument()->addScriptOptions(
             'plg_content_wikipedia',
-            array('dictionary' => $dictionary
+            array('dictionary' => $dictionary,
+                  'color' => $this->params->get('color',''),
+                  'linkcolor' => $this->params->get('linkcolor',''),
+                  'bgcolor' => $this->params->get('bgcolor',''),
                 )
         );
 

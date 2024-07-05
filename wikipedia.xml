@@ -2,12 +2,12 @@
 <extension version="4.0" type="plugin" group="content" method="upgrade">
 	<name>PLG_CONTENT_WIKIPEDIA</name>
 	<author>conseilgouz</author>
-	<creationDate>2024-07-04</creationDate>
+	<creationDate>2024-07-05</creationDate>
 	<copyright>Copyright (C) 2024 ConseilGouz. All rights reserved.</copyright>
 	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
 	<authorUrl>www.conseilgouz.com</authorUrl>
-	<version>1.0.4</version>
+	<version>1.0.5</version>
 	<description>PLG_CONTENT_WIKIPEDIA_XML_DESCRIPTION</description>
 	<files>
 		<folder plugin="wikipedia">services</folder>
@@ -34,7 +34,15 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				
+				<field name="color"  class="thirty left" 
+					type="color" default="#23252b"
+					label="PLG_CONTENT_WIKIPEDIA_COLOR" description="PLG_CONTENT_WIKIPEDIA_COLOR_DESC" />
+				<field name="linkcolor"  class="thirty left" 
+					type="color" default="#23252b"
+					label="PLG_CONTENT_WIKIPEDIA_LINKCOLOR" description="PLG_CONTENT_WIKIPEDIA_LINKCOLOR_DESC" />
+				<field name="bgcolor"  class="thirty" 
+					type="color" default="#d3d3d3"
+					label="PLG_CONTENT_WIKIPEDIA_BGCOLOR" description="PLG_CONTENT_WIKIPEDIA_BGCOLOR_DESC" />
 			</fieldset>
             <fieldset name="dictionary_set" label="PLG_CONTENT_WIKIPEDIA_DICTIONARY">
                     <field type="note" name="note1" description="PLG_CONTENT_WIKIPEDIA_NOTE1" class="alert-success"/> 

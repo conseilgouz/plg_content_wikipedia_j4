@@ -21,6 +21,11 @@ body = document.querySelector('body');
 var template = document.createElement("template");
 var control = document.createElement("span");
 control.id = "control";
+if (wikioptions.color)
+    control.style.color = wikioptions.color;
+if (wikioptions.bgcolor)
+    control.style.backgroundColor = wikioptions.bgcolor;
+
 template.appendChild(control);
 body.appendChild(template);
 
@@ -72,6 +77,8 @@ document.querySelector('body').onpointerup = (event)=>{
             alink.setAttribute('href',url);
             alink.setAttribute('target','_blank');
             alink.innerHTML = text;
+            if (wikioptions.linkcolor)
+                alink.style.color = wikioptions.linkcolor;
             control.appendChild(alink);
         }
         document.body.appendChild(control);
