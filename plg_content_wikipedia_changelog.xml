@@ -3,6 +3,18 @@
 		<element>wikipedia</element>
 		<type>plugin</type>
 		<group>content</group>
+		<version>1.0.6</version>
+        <note>
+            <item>Update : 05/07/2024</item>
+        </note>
+		<fix>
+			<item>EN Translation file update</item>
+		</fix>
+    </changelog>
+    <changelog>
+		<element>wikipedia</element>
+		<type>plugin</type>
+		<group>content</group>
 		<version>1.0.5</version>
         <note>
             <item>Update : 05/07/2024</item>
