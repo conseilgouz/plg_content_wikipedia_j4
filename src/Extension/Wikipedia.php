@@ -177,7 +177,7 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
         $query->select('*')
         ->from($db->quoteName('#__cgwiki'))
         ->where($db->qn('text') .' LIKE '.$db->q($text))
-        ->where("SUBSTRING(".$db->qn('language').", 1, 2) LIKE ".$db->q($lang) ." OR ".$db->qn('language'). " = ".$db->q('*'));
+        ->where("(SUBSTRING(".$db->qn('language').", 1, 2) LIKE ".$db->q($lang) ." OR ".$db->qn('language'). " = ".$db->q('*').")");
         $db->setQuery($query);
         $res = $db->loadObject();
         if ($res) {
