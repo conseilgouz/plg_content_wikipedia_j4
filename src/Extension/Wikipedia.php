@@ -172,13 +172,12 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
     private function getInfoDB($text, $lang)
     {
         $langs = ['*',$lang];
-        $ret = [];
         $db = Factory::getContainer()->get(DatabaseInterface::class);
         $query = $db->getQuery(true);
         $query->select('*')
         ->from($db->quoteName('#__cgwiki'))
         ->where($db->qn('text') .' LIKE '.$db->q($text))
-        ->whereIn($db->qn('language'), $langs);
+        ->where("SUBSTRING(".$db->qn('language').", 1, 2) LIKE ".$db->q($lang) ." OR ".$db->qn('language'). " = ".$db->q('*'));
         $db->setQuery($query);
         $res = $db->loadObject();
         if ($res) {
