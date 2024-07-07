@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function(){
         field.parentNode.parentNode.style.gridColumn = "auto";
     }
     reload = document.querySelector('#dict_reload');
+    counts = document.querySelector('#counts');
     reload.addEventListener('click',function(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -68,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function(){
             url   : url,
             onSuccess: function (data, xhr) {
                 reload.removeAttribute('disabled'); 
+                counts.innerHTML = "";
                 var parsed = JSON.parse(data);
                 res = document.querySelector('#res');
                 if (parsed.ret == 0) {

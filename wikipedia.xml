@@ -74,7 +74,7 @@
             <fieldset name="dictionary_sql" label="PLG_CONTENT_WIKIPEDIA_SQLDICTIONARY" 
                 addfieldprefix="ConseilGouz\Plugin\Content\Wikipedia\Field">
                     <field type="note" name="note2" description="PLG_CONTENT_WIKIPEDIA_NOTE2" class="alert-success"/> 
-                    <field name="sqldict" label="" type="sqldict"  /> 
+                    <field name="sqldict" label="" type="sqldict" /> 
             </fieldset>
             
 		</fields>
