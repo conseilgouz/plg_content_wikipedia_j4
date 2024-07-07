@@ -106,6 +106,7 @@ function goAjax(event,text,lang) {
         method   : 'POST',
         url   : url,
         onSuccess: function (data, xhr) {
+            if (data.indexOf('definition') < 0) return false;
             var parsed = JSON.parse(data);
             if (parsed.ret == 0) {
                createControl(event,parsed.definition,parsed.url);

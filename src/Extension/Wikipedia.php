@@ -191,10 +191,14 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
     }
     private function getInfoWikipedia($text, $lang)
     {
+        $text = str_replace(" ", '%20', $text);
         $url = 'https://api.wikimedia.org/core/v1/wikipedia/'.$lang.'/search/page?q='.$text.'&limit=1';
         $response = self::getWikipedia_via_curl($url);
         if ($response) {
             $json_array = json_decode($response);
+            if (!isset($json_array->pages)) {
+                return false;
+            }
             $res = $json_array->pages[0];
             $url = "https://".$lang.".wikipedia.org/wiki/".$res->key;
             return "definition\":\"".$res->description."\",\"url\":\"".$url;
