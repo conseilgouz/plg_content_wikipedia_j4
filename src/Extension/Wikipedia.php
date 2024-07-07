@@ -18,7 +18,6 @@ use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\Database\DatabaseAwareTrait;
 use Joomla\Database\DatabaseInterface;
 use Joomla\Event\SubscriberInterface;
-use Joomla\Filesystem\File;
 
 final class Wikipedia extends CMSPlugin implements SubscriberInterface
 {
@@ -77,13 +76,14 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
             if (!$val) {
                 $msg = Text::_('PLG_CONTENT_WIKIPEDIA_SQLERR');
                 Factory::getApplication()->enqueueMessage($msg, 'notice');
+                $out = '{"ret":"0","msg":"'.$msg.'"}';
             } else {
                 $msg = sprintf(Text::_('PLG_CONTENT_WIKIPEDIA_SQLOK'), $val);
                 Factory::getApplication()->enqueueMessage($msg, 'error');
+                $out = '{"ret":"9","msg":"'.$msg.'"}';
             }
-            $out = '{"ret":"0","msg":"'.$msg.'"}';
         } elseif ($action == "info") {
-            $text = $input->get('text');
+            $text = $input->getRaw('text');
             $lang = $input->get('lang');
             $result = $this->getInfo($text, $lang);
             $out = '{"ret":"0","'.$result.'"}';
@@ -102,6 +102,9 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
     private function create_dico()
     {
         $tab = "\t";
+        if (!is_file(JPATH_ROOT.'/tmp/dico.txt')) {
+            return;
+        }
         $fp = fopen(JPATH_ROOT.'/tmp/dico.txt', 'r');
         if (!$fp) { // file not found : exit
             return;

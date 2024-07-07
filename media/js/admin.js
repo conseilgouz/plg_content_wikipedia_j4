@@ -61,15 +61,19 @@ document.addEventListener("DOMContentLoaded", function(){
     reload.addEventListener('click',function(e) {
         e.stopPropagation();
         e.preventDefault();
-        // var token = $("#token").attr("name");
+        reload.setAttribute('disabled', '');
         url = '?option=com_ajax&plugin=wikipedia&action=dictload&group=content&format=raw';
         Joomla.request({
             method   : 'POST',
             url   : url,
             onSuccess: function (data, xhr) {
+                reload.removeAttribute('disabled'); 
                 var parsed = JSON.parse(data);
+                res = document.querySelector('#res');
                 if (parsed.ret == 0) {
+                    res.innerHTML = parsed.msg;
                 } else {
+                    res.innerHTML = parsed.msg;
                 }
             }
         });
