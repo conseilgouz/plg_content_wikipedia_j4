@@ -57,4 +57,21 @@ document.addEventListener("DOMContentLoaded", function(){
         let field = fields[i];
         field.parentNode.parentNode.style.gridColumn = "auto";
     }
+    reload = document.querySelector('#dict_reload');
+    reload.addEventListener('click',function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        // var token = $("#token").attr("name");
+        url = '?option=com_ajax&plugin=wikipedia&action=dictload&group=content&format=raw';
+        Joomla.request({
+            method   : 'POST',
+            url   : url,
+            onSuccess: function (data, xhr) {
+                var parsed = JSON.parse(data);
+                if (parsed.ret == 0) {
+                } else {
+                }
+            }
+        });
+    })
 })

@@ -46,55 +46,74 @@ document.querySelector('body').onpointerup = (event)=>{
         }
         return;
     }
-    async function ask(text, event, control) {
-        let url = `https://api.wikimedia.org/core/v1/wikipedia/`+lang[0]+`/search/page?q=`+text+`&limit=1`;
-        let response = await fetch( url);
-        response.json()
-            .then((data) => {
-                alink =  control.querySelector('a');
-                if (alink) control.removeChild(alink);
-                if (!data.pages.length) return;
-                resp = data.pages[0].description;
-                wlink = "https://"+lang[0]+".wikipedia.org/wiki/"+data.pages[0].key;
-                createControl(event,resp,wlink) 
-                }
-            )
-            .catch(console.error);
-        
-    }
-    function createControl(event,text,url) {
-        // Find out how much (if any) user has scrolled
-        var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-        // Get cursor position
-        const posX = event.clientX - 20;
-        const posY = event.clientY + 20 + scrollTop;
-        control.style.top = posY+'px';
-        control.style.left = posX+'px';
-        if (!url) {
-            control.innerHTML = text;
-        } else {
-            alink = document.createElement("a");
-            alink.setAttribute('href',url);
-            alink.setAttribute('target','_blank');
-            alink.innerHTML = text;
-            if (wikioptions.linkcolor)
-                alink.style.color = wikioptions.linkcolor;
-            control.appendChild(alink);
+    if (wikioptions.ajax == 'true') { // ajax mode
+        ret = goAjax(event,text.trim().toLocaleLowerCase(),lang[0]);
+    } else { // non ajax mode 
+        textlang = (text.trim().toLocaleLowerCase())+'&'+lang[0];
+        textall = (text.trim().toLocaleLowerCase())+'&*';
+        if (typeof wikioptions.dictionary[textlang] != "undefined") { // text for browser language exists
+            definition = wikioptions.dictionary[textlang].definition;
+            url = wikioptions.dictionary[textlang].url;
+            createControl(event,definition,url);
+        } else if (typeof wikioptions.dictionary[textall] != "undefined") { // text for all languages
+            definition = wikioptions.dictionary[textall].definition;
+            url = wikioptions.dictionary[textall].url;
+            createControl(event,definition,url)
+        } else { // ask wikipedia
+            ask(text, event, control);
         }
-        document.body.appendChild(control);
     }
-    textlang = (text.trim().toLocaleLowerCase())+'&'+lang[0];
-    textall = (text.trim().toLocaleLowerCase())+'&*';
-    if (typeof wikioptions.dictionary[textlang] != "undefined") { // text for browser language exists
-        definition = wikioptions.dictionary[textlang].definition;
-        url = wikioptions.dictionary[textlang].url;
-        createControl(event,definition,url);
-    } else if (typeof wikioptions.dictionary[textall] != "undefined") { // text for all languages
-        definition = wikioptions.dictionary[textall].definition;
-        url = wikioptions.dictionary[textall].url;
-        createControl(event,definition,url)
-    } else { // ask wikipedia
-        ask(text, event, control);
+}
+async function ask(text, event, control) {
+    let url = `https://api.wikimedia.org/core/v1/wikipedia/`+lang[0]+`/search/page?q=`+text+`&limit=1`;
+    let response = await fetch( url);
+    response.json()
+        .then((data) => {
+            alink =  control.querySelector('a');
+            if (alink) control.removeChild(alink);
+            if (!data.pages.length) return;
+            resp = data.pages[0].description;
+            wlink = "https://"+lang[0]+".wikipedia.org/wiki/"+data.pages[0].key;
+            createControl(event,resp,wlink) 
+            }
+        )
+        .catch(console.error);
+}
+function createControl(event,text,url) {
+   // Find out how much (if any) user has scrolled
+    var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+  // Get cursor position
+    const posX = event.clientX - 20;
+    const posY = event.clientY + 20 + scrollTop;
+    control.style.top = posY+'px';
+    control.style.left = posX+'px';
+    if (!url) {
+        control.innerHTML = text;
+    } else {
+        alink = document.createElement("a");
+        alink.setAttribute('href',url);
+        alink.setAttribute('target','_blank');
+        alink.innerHTML = text;
+        if (wikioptions.linkcolor)
+            alink.style.color = wikioptions.linkcolor;
+        control.appendChild(alink);
     }
+    document.body.appendChild(control);
+}
+function goAjax(event,text,lang) {
+    url = '?option=com_ajax&plugin=wikipedia&action=info&group=content&text='+ text+'&lang='+lang+'&format=raw';
+    Joomla.request({
+        method   : 'POST',
+        url   : url,
+        onSuccess: function (data, xhr) {
+            var parsed = JSON.parse(data);
+            if (parsed.ret == 0) {
+               createControl(event,parsed.definition,parsed.url);
+               return true;
+            } else {
+                return false;
+            }
+        }
+    });
 }
 })

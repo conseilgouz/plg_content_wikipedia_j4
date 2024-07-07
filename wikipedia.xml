@@ -2,16 +2,20 @@
 <extension version="4.0" type="plugin" group="content" method="upgrade">
 	<name>PLG_CONTENT_WIKIPEDIA</name>
 	<author>conseilgouz</author>
-	<creationDate>2024-07-05</creationDate>
+	<creationDate>2024-07-06</creationDate>
 	<copyright>Copyright (C) 2024 ConseilGouz. All rights reserved.</copyright>
 	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
 	<authorUrl>www.conseilgouz.com</authorUrl>
-	<version>1.0.6</version>
+	<version>1.1.0</version>
 	<description>PLG_CONTENT_WIKIPEDIA_XML_DESCRIPTION</description>
+	<scriptfile>script.php</scriptfile>
+	<namespace path="src">ConseilGouz\Plugin\Content\Wikipedia</namespace>
+	<changelogurl>https://raw.githubusercontent.com/conseilgouz/plg_content_wikipedia_j4/master/plg_content_wikipedia_changelog.xml</changelogurl>
 	<files>
 		<folder plugin="wikipedia">services</folder>
 		<folder>src</folder>
+        <folder>sql</folder>
 		<filename >index.html</filename>
 		<filename >section.xml</filename>
 	</files>
@@ -26,14 +30,32 @@
 		<language tag="en-GB">language/en-GB/plg_content_wikipedia.ini</language>
 		<language tag="en-GB">language/en-GB/plg_content_wikipedia.sys.ini</language>
 	</languages>
-	<scriptfile>script.php</scriptfile>
-	<namespace path="src">ConseilGouz\Plugin\Content\Wikipedia</namespace>
-	
-	<changelogurl>https://raw.githubusercontent.com/conseilgouz/plg_content_wikipedia_j4/master/plg_content_wikipedia_changelog.xml</changelogurl>
-	
+    <install>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql
+			</file>
+		</sql>
+	</install>
+    <uninstall>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql
+			</file>
+		</sql>
+	</uninstall>
+   	<update>
+		<schemas>
+			<schemapath type="mysql">sql/updates</schemapath>
+		</schemas>
+	</update>
 	<config>
 		<fields name="params">
-			<fieldset name="basic">
+			<fieldset name="basic" addfieldprefix="ConseilGouz\Plugin\Content\Wikipedia\Field">
+				<field name="version" type="version" extension="secure" margintop="-4em" xml="/plugins/content/wikipedia/wikipedia.xml"/>
+                <field name="ajax" type="radio" class="btn-group" default="false"
+                label="PLG_CONTENT_WIKIPEDIA_AJAX" description="PLG_CONTENT_WIKIPEDIA_AJAX_DESC" >
+					<option value="true">JYES</option> 
+					<option value="false">JNO</option> 
+				</field>
 				<field name="color"  class="thirty left" 
 					type="color" default="#23252b"
 					label="PLG_CONTENT_WIKIPEDIA_COLOR" description="PLG_CONTENT_WIKIPEDIA_COLOR_DESC" />
@@ -48,6 +70,11 @@
                     <field type="note" name="note1" description="PLG_CONTENT_WIKIPEDIA_NOTE1" class="alert-success"/> 
                     <field name="sectionsList" label="" type="subform" multiple ="true" 
                         formsource="/plugins/content/wikipedia/section.xml"   />
+            </fieldset>
+            <fieldset name="dictionary_sql" label="PLG_CONTENT_WIKIPEDIA_SQLDICTIONARY" 
+                addfieldprefix="ConseilGouz\Plugin\Content\Wikipedia\Field">
+                    <field type="note" name="note2" description="PLG_CONTENT_WIKIPEDIA_NOTE2" class="alert-success"/> 
+                    <field name="sqldict" label="" type="sqldict"  /> 
             </fieldset>
             
 		</fields>

@@ -3,6 +3,18 @@
 		<element>wikipedia</element>
 		<type>plugin</type>
 		<group>content</group>
+		<version>1.1.0</version>
+        <note>
+            <item>Update : 07/07/2024</item>
+        </note>
+		<addition>
+			<item>Mode AJAX and CGWiki table</item>
+		</addition>
+    </changelog>
+    <changelog>
+		<element>wikipedia</element>
+		<type>plugin</type>
+		<group>content</group>
 		<version>1.0.6</version>
         <note>
             <item>Update : 05/07/2024</item>

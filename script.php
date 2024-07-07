@@ -1,7 +1,6 @@
 <?php
 /**
 * Wikipedia Plugin  - Joomla 4.x/5.x plugin
-* Version			: 1.0.0
 * copyright 		: Copyright (C) 2024 ConseilGouz. All rights reserved.
 * license    		: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
 */
