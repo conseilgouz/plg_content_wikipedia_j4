@@ -8,6 +8,8 @@
  * from https://awik.io/get-selected-text-and-cursor-position-javascript-to-show-popup-dialog
  */
 var wikioptions;
+var wikiscrollTop;
+
 document.addEventListener("DOMContentLoaded", function(){
 
 wikioptions= Joomla.getOptions('plg_content_wikipedia');
@@ -46,8 +48,11 @@ document.querySelector('body').onpointerup = (event)=>{
         }
         return;
     }
+   // Find out how much (if any) user has scrolled
+    wikiscrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+    
     if (wikioptions.ajax == 'true') { // ajax mode
-        ret = goAjax(event,text.trim().toLocaleLowerCase(),lang[0]);
+        goAjax(event,text.trim().toLocaleLowerCase(),lang[0]);
     } else { // non ajax mode 
         textlang = (text.trim().toLocaleLowerCase())+'&'+lang[0];
         textall = (text.trim().toLocaleLowerCase())+'&*';
@@ -80,11 +85,9 @@ async function ask(text, event, control) {
         .catch(console.error);
 }
 function createControl(event,text,url) {
-   // Find out how much (if any) user has scrolled
-    var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
   // Get cursor position
     const posX = event.clientX - 20;
-    const posY = event.clientY + 20 + scrollTop;
+    const posY = event.clientY + 20 + wikiscrollTop;
     control.style.top = posY+'px';
     control.style.left = posX+'px';
     if (!url) {

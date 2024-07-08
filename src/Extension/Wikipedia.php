@@ -45,14 +45,16 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
         $wa->registerAndUseStyle('wikipedia', $media.'css/wikipedia.css');
         $wa->registerAndUseScript('wikipedia', $media.'js/wikipedia.js');
         $dictionary = [];
-        $sectionsList = $this->params->get('sectionsList');
-        foreach ($sectionsList as $section) {
-            $entry = [];
-            $entry['definition'] = $section->definition;
-            $entry['language'] = $section->language;
-            $entry['url'] = $section->url;
-            $lang = explode('-', $entry['language'])[0];
-            $dictionary[strtolower($section->text).'&'.$lang] = $entry;
+        if ($this->params->get('ajax','false') == "true") {
+            $sectionsList = $this->params->get('sectionsList');
+            foreach ($sectionsList as $section) {
+                $entry = [];
+                $entry['definition'] = $section->definition;
+                $entry['language'] = $section->language;
+                $entry['url'] = $section->url;
+                $lang = explode('-', $entry['language'])[0];
+                $dictionary[strtolower($section->text).'&'.$lang] = $entry;
+            }
         }
         Factory::getApplication()->getDocument()->addScriptOptions(
             'plg_content_wikipedia',
