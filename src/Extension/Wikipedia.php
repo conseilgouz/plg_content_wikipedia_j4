@@ -15,6 +15,7 @@ use Joomla\CMS\Event\Content\ContentPrepareEvent;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Session\Session;
 use Joomla\Database\DatabaseAwareTrait;
 use Joomla\Database\DatabaseInterface;
 use Joomla\Event\SubscriberInterface;
@@ -70,6 +71,7 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
     }
     public function goAjax($event)
     {
+        Session::checkToken() or jexit(Text::_('JINVALID_TOKEN'));
         $this->loadLanguage();
         $input	= Factory::getApplication()->input;
         $action = $input->get('action');
