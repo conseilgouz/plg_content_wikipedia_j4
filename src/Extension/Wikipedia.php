@@ -45,7 +45,7 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
         $wa->registerAndUseStyle('wikipedia', $media.'css/wikipedia.css');
         $wa->registerAndUseScript('wikipedia', $media.'js/wikipedia.js');
         $dictionary = [];
-        if ($this->params->get('ajax','false') == "true") {
+        if ($this->params->get('ajax','false') == "false") { // non ajax : use local dictionary
             $sectionsList = $this->params->get('sectionsList');
             foreach ($sectionsList as $section) {
                 $entry = [];
