@@ -109,13 +109,13 @@ function goAjax(event,text,lang) {
         method   : 'POST',
         url   : url,
         onSuccess: function (data, xhr) {
-            if (data.indexOf('definition') < 0) return false;
+            if (data.indexOf('ret') < 0) return false;
             var parsed = JSON.parse(data);
             if (parsed.ret == 0) {
                createControl(event,parsed.definition,parsed.url);
                return true;
-            } else {
-                return false;
+            } else if (parsed.ret == 9) { // not found in database, check wikipedia
+                ask(text, event, control);
             }
         }
     });

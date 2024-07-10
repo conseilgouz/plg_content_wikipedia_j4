@@ -46,7 +46,7 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
         $wa->registerAndUseStyle('wikipedia', $media.'css/wikipedia.css');
         $wa->registerAndUseScript('wikipedia', $media.'js/wikipedia.js');
         $dictionary = [];
-        if ($this->params->get('ajax','false') == "false") { // non ajax : use local dictionary
+        if ($this->params->get('ajax', 'false') == "false") { // non ajax : use local dictionary
             $sectionsList = $this->params->get('sectionsList');
             foreach ($sectionsList as $section) {
                 $entry = [];
@@ -90,7 +90,11 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
             $text = $input->getRaw('text');
             $lang = $input->get('lang');
             $result = $this->getInfo($text, $lang);
-            $out = '{"ret":"0","'.$result.'"}';
+            if (!$result) {
+                $out = '{"ret":"9","msg":"Inconnu"}';
+            } else {
+                $out = '{"ret":"0","'.$result.'"}';
+            }
         } else {
             $out = '{"ret":"9","msg":"Inconnu"}';
         }
@@ -171,9 +175,11 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
     private function getInfo($text, $lang)
     {
         $res = $this->getInfoDB($text, $lang);
-        if (!$res) {
-            $res = $this->getInfoWikipedia($text, $lang);
-        }
+        /* not used : wikipedia search done in JS
+            if (!$res) {
+                // $res = $this->getInfoWikipedia($text, $lang);
+            }
+        */
         return $res;
     }
     private function getInfoDB($text, $lang)
@@ -193,6 +199,7 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
             return false;
         }
     }
+
     private function getInfoWikipedia($text, $lang)
     {
         $text = str_replace(" ", '%20', $text);
