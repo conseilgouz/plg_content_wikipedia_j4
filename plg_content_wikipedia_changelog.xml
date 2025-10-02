@@ -3,6 +3,21 @@
 		<element>wikipedia</element>
 		<type>plugin</type>
 		<group>content</group>
+		<version>1.2.0</version>
+        <note>
+            <item>Update : 02/10/2025</item>
+        </note>
+        <fix>
+            <item>Joomla 6.x compatibility</item>
+        </fix>
+		<change>
+			<item>Use ConseilGouz Library</item>
+		</change>
+    </changelog>
+    <changelog>
+		<element>wikipedia</element>
+		<type>plugin</type>
+		<group>content</group>
 		<version>1.1.4</version>
         <note>
             <item>Update : 10/07/2024</item>
