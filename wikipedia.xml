@@ -2,12 +2,12 @@
 <extension version="4.0" type="plugin" group="content" method="upgrade">
 	<name>PLG_CONTENT_WIKIPEDIA</name>
 	<author>conseilgouz</author>
-	<creationDate>2025-10-02</creationDate>
-	<copyright>Copyright (C) 2024 ConseilGouz. All rights reserved.</copyright>
+	<creationDate>2026-07-16</creationDate>
+	<copyright>Copyright (C) 2026 ConseilGouz. All rights reserved.</copyright>
 	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
 	<authorUrl>www.conseilgouz.com</authorUrl>
-	<version>1.2.0</version>
+	<version>1.2.2</version>
 	<description>PLG_CONTENT_WIKIPEDIA_XML_DESCRIPTION</description>
 	<scriptfile>script.php</scriptfile>
 	<namespace path="src">ConseilGouz\Plugin\Content\Wikipedia</namespace>
@@ -44,7 +44,7 @@
 	</uninstall>
    	<update>
 		<schemas>
-			<schemapath type="mysql">sql/updates</schemapath>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
 		</schemas>
 	</update>
 	<config>
