@@ -3,6 +3,19 @@
 		<element>wikipedia</element>
 		<type>plugin</type>
 		<group>content</group>
+		<version>1.2.1</version>
+        <note>
+            <item>Update : 16/07/2026</item>
+        </note>
+        <fix>
+            <item>mysql update : must be in sqm/updates/mysql folder</item>
+            <item>wiki file load : check access</item>
+        </fix>
+    </changelog>
+    <changelog>
+		<element>wikipedia</element>
+		<type>plugin</type>
+		<group>content</group>
 		<version>1.2.0</version>
         <note>
             <item>Update : 02/10/2025</item>

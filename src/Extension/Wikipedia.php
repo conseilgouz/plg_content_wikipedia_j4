@@ -3,7 +3,7 @@
  * Plugin Wikipedia : search wikipedia for selected text in an article
  *
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
- * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
+ * @copyright (c) 2026 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz
  */
 
@@ -120,7 +120,11 @@ final class Wikipedia extends CMSPlugin implements SubscriberInterface
         // clean up dictionary table
         $db = Factory::getContainer()->get(DatabaseInterface::class);
         $db->truncateTable('#__cgwiki');
-        $user = Factory::getApplication()->getIdentity();
+        $app = Factory::getApplication();
+        if (!$app->isClient('administrator') || $app->getIdentity()->guest) {
+            return; // not allowed
+        }
+        $user = $app->getIdentity();
         // reload it from text file
         $columns = array('text', 'language', 'definition',  'url', 'created', 'created_by');
         $count = 0;
